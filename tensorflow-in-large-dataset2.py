@@ -44,8 +44,6 @@ dataset = tf.data.Dataset.from_generator(dataset.gen()) \
                          .batch(batch_size) \
                          .prefetch(tf.data.experimental.AUTOTUNE)
 
-
-
 model = tf.keras.Sequential([
     tf.keras.layers.Conv2D(32, 3, activation='relu', input_shape=(256, 256, 3)),
     tf.keras.layers.MaxPooling2D(),

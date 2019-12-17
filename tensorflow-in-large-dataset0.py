@@ -5,6 +5,8 @@ import tensorflow as tf
 
 # tensorflow 处理大数据集示例
 
+# 除非是特别大的数据，否则不要使用 tf.data
+
 num_epochs = 10
 batch_size = 32
 learning_rate = 0.001
