@@ -6,11 +6,11 @@ import tensorflow as tf
 # tensorflow 处理大数据集示例
 
 
-data_dir = 'C:/datasets/cats_vs_dogs'
-train_dogs_dir = data_dir + '/train/dogs/'
-train_cats_dir = data_dir + '/train/cats/'
-test_dogs_dir = data_dir + '/valid/dogs/'
-test_cats_dir = data_dir + '/valid/cats/'
+data_dir = 'E:\\datasets\\dogs-vs-cats\\'
+train_dogs_dir = data_dir + 'train\\dogs\\*.jpg'
+train_cats_dir = data_dir + 'train\\cats\\*.jpg'
+valid_dogs_dir = data_dir + 'valid\\dogs\\*.jpg'
+valid_cats_dir = data_dir + 'valid\\cats\\*.jpg'
 
 
 class DataGenerator:

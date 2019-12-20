@@ -5,14 +5,12 @@ import tensorflow as tf
 
 # tensorflow 处理大数据集示例
 
-num_epochs = 10
-batch_size = 32
-learning_rate = 0.001
-data_dir = 'C:/datasets/cats_vs_dogs'
-train_cats_dir = data_dir + '/train/cats/'
-train_dogs_dir = data_dir + '/train/dogs/'
-test_cats_dir = data_dir + '/valid/cats/'
-test_dogs_dir = data_dir + '/valid/dogs/'
+
+data_dir = 'E:\\datasets\\dogs-vs-cats\\'
+train_dogs_dir = data_dir + 'train\\dogs\\*.jpg'
+train_cats_dir = data_dir + 'train\\cats\\*.jpg'
+valid_dogs_dir = data_dir + 'valid\\dogs\\*.jpg'
+valid_cats_dir = data_dir + 'valid\\cats\\*.jpg'
 
 # wrapper
 
@@ -53,6 +51,10 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(2, activation='softmax')
 ])
+
+num_epochs = 10
+batch_size = 32
+learning_rate = 0.001
 
 model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
