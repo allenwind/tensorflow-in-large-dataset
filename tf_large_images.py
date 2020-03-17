@@ -1,24 +1,18 @@
-import os
-import glob
 import warnings
 warnings.filterwarnings("ignore")
-
+import os
+import glob
 import numpy as np
 import tensorflow as tf
 
-# tensorflow 处理大数据集示例
-
-# 除非是特别大的数据，否则不要使用 tf.data
-
-
-data_dir = 'E:\\datasets\\dogs-vs-cats\\'
-train_dogs_dir = data_dir + 'train\\dogs\\*.jpg'
-train_cats_dir = data_dir + 'train\\cats\\*.jpg'
-valid_dogs_dir = data_dir + 'valid\\dogs\\*.jpg'
-valid_cats_dir = data_dir + 'valid\\cats\\*.jpg'
+prefix = "/home/zhiwen/workspace/dataset/fastai-datasets-cats-vs-dogs/"
+train_dogs_dir = prefix + "train/dogs/*.jpg"
+train_cats_dir = prefix + "train/cats/*.jpg"
+valid_dogs_dir = prefix + "valid/dogs/*.jpg"
+valid_cats_dir = prefix + "valid/cats/*.jpg"
 
 
-def read_files(dogs_dir, cats_dir):
+def load_files(dogs_dir, cats_dir):
     dog_files = glob.glob(dogs_dir) # or use tf.data.Dataset.list_files
     cat_files = glob.glob(cats_dir)
     files = np.array(dog_files + cat_files)
@@ -37,14 +31,16 @@ def fn(filename, label):
     return image_resized, label
 
 batch_size = 32
-files, labels = read_files(train_dogs_dir, train_cats_dir)
+# 训练集
+files, labels = load_files(train_dogs_dir, train_cats_dir)
 train_dataset = tf.data.Dataset.from_tensor_slices((files, labels)) \
                          .map(fn, num_parallel_calls=tf.data.experimental.AUTOTUNE) \
                          .shuffle(buffer_size=256) \
                          .batch(batch_size) \
                          .prefetch(tf.data.experimental.AUTOTUNE)
 
-files, labels = read_files(valid_dogs_dir, valid_cats_dir)
+# 验证集
+files, labels = load_files(valid_dogs_dir, valid_cats_dir)
 valid_dataset = tf.data.Dataset.from_tensor_slices((files, labels)) \
                                .map(fn, num_parallel_calls=tf.data.experimental.AUTOTUNE) \
                                .batch(batch_size) \
