@@ -46,13 +46,13 @@ valid_dataset = tf.data.Dataset.from_tensor_slices((files, labels)) \
                                .batch(batch_size) \
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Conv2D(32, 3, activation='relu', input_shape=(256, 256, 3)),
+    tf.keras.layers.Conv2D(32, 3, activation="relu", input_shape=(256, 256, 3)),
     tf.keras.layers.MaxPooling2D(),
-    tf.keras.layers.Conv2D(32, 5, activation='relu'),
+    tf.keras.layers.Conv2D(32, 5, activation="relu"),
     tf.keras.layers.MaxPooling2D(),
     tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(64, activation='relu'),
-    tf.keras.layers.Dense(2, activation='softmax')
+    tf.keras.layers.Dense(64, activation="relu"),
+    tf.keras.layers.Dense(2, activation="softmax")
 ])
 
 model.compile(
